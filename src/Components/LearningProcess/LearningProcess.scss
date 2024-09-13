@@ -1,0 +1,52 @@
+.learning-process {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.lp-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: absolute; /* !!! */
+  margin-top: 68%;
+  margin-left: 96%;
+  // top: 33em;
+  // left: 40em;
+  // top: 48%;
+  // left: 42%;
+}
+
+@mixin answer-button($color) {
+  width: 7em;
+  height: 2.8em;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 17px;
+  border-color: rgb(30, 30, 30);
+  border-width: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: white;
+
+  background-color: $color;
+}
+
+.know-button {
+  @include answer-button($color: #f13c20);
+  &:hover {
+    background-color: #b40101;
+    border-color: rgb(48, 48, 48);
+  }
+}
+
+.unknown-button {
+  @include answer-button($color: #f13c20);
+  &:hover {
+    background-color: #f13c20b3;
+    border-color: rgb(48, 48, 48);
+  }
+}

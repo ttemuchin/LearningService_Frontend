@@ -1,0 +1,65 @@
+.menu {
+  //   clip-path: polygon(0 0, 95% 5%, 95% 95%, 0 100%);
+  //   border-radius: 20px; it was another idea..
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  // width: 7vw;
+  // height: 68vh;
+  width: 105px;
+  height: 470px;
+  background-color: #4056a1;
+  clip-path: inset(0 0 0 round 55px 0 55px 0);
+  display: flex;
+  justify-content: center; /*по горизонтали */
+  align-items: center; /*по вертикали */
+}
+
+.menu-items {
+  position: relative;
+  display: flex;
+  gap: 70px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+%menu-item {
+  display: block;
+}
+
+.menu-icon {
+  @extend %menu-item;
+  width: 60px;
+  height: 60px;
+  border-radius: 3px;
+  filter: drop-shadow(0 0 0.5em #61dafbaa);
+}
+
+.menu-tglink {
+  @extend %menu-item;
+  width: 60px;
+  height: 50px;
+  padding: 0.5em;
+  will-change: filter;
+  transition: filter 300ms;
+  &:hover {
+    filter: drop-shadow(0 0 0.5em #61dafbaa);
+  }
+}
+
+.menu-link {
+  @extend %menu-item;
+  border-radius: 4px;
+  width: 70px;
+  height: 25px;
+  font-weight: 400;
+  background-color: rgba(0, 0, 0, 0.242);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  link {
+    margin-top: 20px;
+  }
+}

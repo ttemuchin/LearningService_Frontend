@@ -1,0 +1,39 @@
+.card {
+  width: 8em;
+  height: 13em;
+  // background-color: #fce079;
+  // border: 2px solid #ffd748;
+  background-color: #efe2ba;
+  border: 3px solid #d79922;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: black;
+  font-size: 32px;
+  perspective: 1000px;
+  position: absolute; /* !!! */
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.65s; /* for animation */
+}
+
+.card.flipped {
+  transform: translate(-50%, -42%) rotateY(360deg);
+}
+
+.card-content {
+  backface-visibility: hidden;
+}
+.card-content.flipped {
+  /* показываем или не показываем контент но сложно.. надо лезть в асинх
+  чтобы убрать текст во время анимации но показать после анимации 
+  т е просто зафиксировать момент с сетТаймаутом и включить текст*/
+  //display: none;
+  display: block;
+}
+.card-content:not(.flipped) {
+  display: block;
+}
