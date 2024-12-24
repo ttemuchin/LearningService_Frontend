@@ -7,7 +7,6 @@ type WordProps = {
   card: Card;
   onEdit: (updatedCard: Card) => void;
   onDelete: (cardId: string) => void;
-  updateWord: (word: Card) => Promise<Card>;
 };
 
 const Word: React.FC<WordProps> = ({ card, onEdit, onDelete }) => {
@@ -48,15 +47,14 @@ const Word: React.FC<WordProps> = ({ card, onEdit, onDelete }) => {
   const handleSubmit = async () => {
     if (rusWord && translation) {
       try {
-        
         const updatedCard = await WordsAPI.updateWord({ id: card.id, rusWord, translation });
-        onEdit(updatedCard); 
+        onEdit(updatedCard);
         setIsEditing(false);
         setShowButtons(false);
-        setError(null); 
+        setError(null);
       } catch (error) {
         console.error(error);
-        setError('Не удалось обновить слово');
+        setError("Не удалось обновить слово");
       }
       // onEdit({ id: card.id, rusWord, translation });
       // setIsEditing(false);
