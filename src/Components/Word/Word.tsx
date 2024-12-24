@@ -1,31 +1,34 @@
 import React, { useState } from "react";
 import "./Word.scss";
+import { WordsAPI } from "../../api/api";
 import { Card } from "../../types/Card/Card";
 
 type WordProps = {
   card: Card;
   onEdit: (updatedCard: Card) => void;
   onDelete: (cardId: string) => void;
+  updateWord: (word: Card) => Promise<Card>;
 };
 
 const Word: React.FC<WordProps> = ({ card, onEdit, onDelete }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  //инпут:
+
   const [rusWord, setRusWord] = useState(card.rusWord);
   const [translation, setTranslation] = useState(card.translation);
+
+  const [error, setError] = useState<string | null>(null);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
     setShowButtons(true);
   };
 
-  //наверно надо асинх
   const handleMouseLeave = () => {
     setIsHovered(false);
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    setTimeout(() => {}, 2500); //костыль.. и притом даже не рабочий
+    setTimeout(() => {}, 2500);
     setTimeout(() => {
       if (!isEditing) {
         setShowButtons(false);
@@ -42,12 +45,23 @@ const Word: React.FC<WordProps> = ({ card, onEdit, onDelete }) => {
     onDelete(card.id);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (rusWord && translation) {
-      onEdit({ id: card.id, rusWord, translation });
-      setIsEditing(false);
-      //исходные значения полей в компонент
-      setShowButtons(false);
+      try {
+        
+        const updatedCard = await WordsAPI.updateWord({ id: card.id, rusWord, translation });
+        onEdit(updatedCard); 
+        setIsEditing(false);
+        setShowButtons(false);
+        setError(null); 
+      } catch (error) {
+        console.error(error);
+        setError('Не удалось обновить слово');
+      }
+      // onEdit({ id: card.id, rusWord, translation });
+      // setIsEditing(false);
+      // //исходные значения полей в компонент
+      // setShowButtons(false);
     }
   };
 
@@ -101,6 +115,7 @@ const Word: React.FC<WordProps> = ({ card, onEdit, onDelete }) => {
           )}
         </div>
       )}
+      {error && <div className="error-message">{error}</div>}
     </div>
   );
 };

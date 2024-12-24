@@ -1,16 +1,13 @@
 import React from "react";
 import styles from "./MainPage.module.scss";
 import { Link, Outlet } from "react-router-dom";
+import WordForm from "./Form23"
 
 const MainPage: React.FC = () => {
-  // const [showButtons, setShowButtons] = useState(true);
-
-  // const removeButtons = () => {
-  //   setShowButtons(false);
-  // }; не нужная штука(( но как обновить стейт.. из словаря идем на мейн, setShowButtons(true)
-
   return (
     <>
+      <WordForm/>
+
       <div className={styles.pageContainer}>
         <div className={styles.buttonContainer}>
           <Link to="dictionary">
